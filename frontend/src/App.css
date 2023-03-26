@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.App{
+    height: 100vh;
+    background: var(--color-text);
+  
+}
+
