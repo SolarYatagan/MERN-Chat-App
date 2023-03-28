@@ -58,7 +58,7 @@ const ChatPlace = () => {
         socket.emit('send_message', data)
         setMessages([...messages, data])
         
-    
+        return () => socket.off('send_message')
       } catch (error) {
         toast({
           title: "Error Occured!",
@@ -74,7 +74,7 @@ const ChatPlace = () => {
   
   useEffect(() => {
     fetchMessages() 
-    selectedChatCompare = selectedChat; //???
+    selectedChatCompare = selectedChat; 
   }, [selectedChat])
 
   useEffect(() => {
@@ -90,8 +90,9 @@ const ChatPlace = () => {
         setMessages([...messages, receivedMessage])
       }
     })
-
+    return () => socket.off("message_received")
   }, [])
+  
   
 
   const sendNotifications = async (receivedMessage) => {
@@ -136,7 +137,9 @@ const ChatPlace = () => {
       };
 
       const { data } = await axios.get('/api/notifications', config)
-      setNotifications([...data])
+      const filtered_data = data.filter((notif) => notif.senderName !== user.name)
+      setNotifications([...filtered_data])
+      
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -224,7 +227,7 @@ const ChatPlace = () => {
                 alignItems='center'
                  >
                  <IconButton 
-                    display={{base: 'flex', md: "none"}}
+                    display="flex"
                     icon={<ArrowBackIcon />}
                     onClick={()=>setSelectedChat()}
                  />

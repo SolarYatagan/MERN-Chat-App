@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-
 const connectDB = require('./config/db');
 
 require('dotenv').config()
@@ -39,7 +38,8 @@ const server = app.listen(port, ()=>{
 const io = require('socket.io')(server, {
     cors: { // it is a security mechanism that allows a web page from one domain to access a resource with a different domain 
         origin: 'http://localhost:3000',
-    }
+    },
+    
 })
 
 io.on('connection', (socket) => {
