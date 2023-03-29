@@ -1,4 +1,5 @@
 ## MERN stack chat application with socket.io
+!!I'm planning to add some new feature to this app
 
 clonning
 ```bash
